@@ -1,0 +1,24 @@
+{
+  "name": "esx-soundbank-editor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Desktop sample browser and replacement tool for Korg Electribe ESX soundbanks",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^34.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.esxeditor.soundbank",
+    "productName": "ESX Soundbank Studio",
+    "files": ["main.cjs", "preload.cjs", "index.html", "renderer/**/*", "src/**/*", "package.json"],
+    "mac": { "category": "public.app-category.music" },
+    "win": { "target": "nsis" },
+    "linux": { "target": "AppImage", "category": "AudioVideo;Audio;" }
+  }
+}

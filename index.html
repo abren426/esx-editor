@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#10110e" />
+  <title>ESX Soundbank Studio</title>
+  <link rel="stylesheet" href="renderer/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark"><span></span><span></span><span></span></div><div><b>ESX</b><small>SOUNDBANK STUDIO</small></div></div>
+      <div class="file-state"><span class="live-dot"></span><span id="bank-name">No soundbank open</span><span class="file-state-muted" id="bank-size">—</span></div>
+      <div class="top-actions"><button class="button primary" id="save-bank" disabled><span class="icon">↓</span> Export soundbank</button></div>
+    </header>
+    <main>
+      <section class="welcome" id="welcome">
+        <div class="welcome-copy"><div class="eyebrow"><i></i> YOUR ESX WORKBENCH</div><h1>Make room for<br><em>new sounds.</em></h1><p>Open an ESX soundbank, audition its samples, and swap in your own audio. Your patterns and settings stay intact.</p><button class="button primary large" id="welcome-open">Open a soundbank <span>→</span></button><div class="format-note"><span class="format-dot"></span> ESX-1 soundbanks <b>·</b> WAV, AIFF, MP3 &amp; FLAC samples</div></div>
+        <div class="welcome-art"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="sound-disc"><div class="disc-groove"></div><div class="disc-hole"></div><div class="disc-label">ESX<br><small>01</small></div></div><div class="sound-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="art-caption"><span>01</span> SOUND LIBRARY <b>●</b> READY</div></div>
+      </section>
+      <section class="workspace hidden" id="workspace">
+        <div class="page-heading"><div><div class="eyebrow"><i></i> SAMPLE LIBRARY</div><h1>Soundbank <span id="sample-count">—</span></h1><p>Choose a sample to preview or replace. Export creates a new ESX file.</p></div><div class="capacity"><div class="capacity-head"><span>MEMORY USED</span><strong id="memory-label">— / 25 MB</strong></div><div class="capacity-track"><span id="memory-bar"></span></div></div></div>
+        <div class="library-grid">
+          <section class="library-panel">
+            <div class="library-toolbar"><div class="search-wrap"><span>⌕</span><input id="search" placeholder="Find a sample…" /></div><div class="filter-group"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="mono">Mono</button><button class="filter" data-filter="stereo">Stereo</button></div></div>
+            <div class="table-head"><span>NO.</span><span>NAME</span><span>TYPE</span><span>DURATION</span><span>SOURCE</span></div>
+            <div class="sample-list" id="sample-list"><div class="empty-list"><span>♪</span><b>Your samples appear here</b><small>Open an ESX soundbank to get started.</small></div></div>
+            <footer class="list-footer"><span id="list-summary">0 samples</span><span><i class="status-dot"></i> LOCAL FILES ONLY</span></footer>
+          </section>
+          <aside class="detail-panel" id="detail-panel">
+            <div class="detail-empty"><div class="empty-disc">♪</div><b>Select a sample</b><span>Preview it, then replace it with your own audio.</span></div>
+            <div class="detail-content hidden" id="detail-content">
+              <div class="detail-top"><span class="eyebrow">SAMPLE <b id="detail-id">—</b></span><span class="pill" id="detail-type">MONO</span></div>
+              <h2 id="detail-name">—</h2><div class="file-origin"><span class="sound-icon">♫</span><span id="detail-origin">Original soundbank</span></div>
+              <div class="wave-card"><canvas id="waveform" width="620" height="150"></canvas><div class="wave-time"><span>0:00</span><span id="duration">0:00</span></div></div>
+              <div class="playback-row"><button class="play-button" id="play-sample" aria-label="Play sample">▶</button><div class="playback-info"><span id="play-label">Preview sample</span><small id="sample-meta">—</small></div><div class="audio-level"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+              <div class="detail-divider"></div>
+              <div class="replace-card"><div class="replace-symbol">↻</div><div><b>Replace this sample</b><span>Audio will be converted to 44.1 kHz, 16-bit PCM.</span></div></div>
+              <button class="button replace-button" id="replace-sample"><span class="icon">＋</span> Choose audio file</button>
+              <div class="compat-note"><span>i</span><span>Replaces the audio in this slot. Part and pattern assignments stay in place.</span></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <div class="toast hidden" id="toast"></div>
+    <div class="drop-overlay hidden" id="drop-overlay"><div><span>＋</span><b>Drop audio to replace this sample</b><small>WAV · AIFF · MP3 · FLAC · OGG</small></div></div>
+    <input type="file" id="fallback-bank" accept=".esx" hidden /><input type="file" id="fallback-audio" accept="audio/*,.aiff,.flac" hidden />
+  </div>
+  <script src="src/esx.js"></script>
+  <script src="renderer/app.js"></script>
+</body>
+</html>
